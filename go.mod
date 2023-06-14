@@ -35,6 +35,4 @@ require (
 	golang.org/x/tools v0.6.0 // indirect
 )
 
-replace github.com/corazawaf/coraza/v3 => ../github.com/bingfengfeifei/coraza
-
-replace github.com/corazawaf/coraza/v3/types => ../github.com/bingfengfeifei/coraza/types
+replace github.com/corazawaf/coraza/v3 => github.com/bingfengfeifei/coraza rule
