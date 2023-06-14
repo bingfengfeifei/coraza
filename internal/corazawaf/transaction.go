@@ -44,6 +44,9 @@ type Transaction struct {
 	// Contains the list of matched rules and associated match information
 	matchedRules []types.MatchedRule
 
+	// Contains the list of matched rules(except action:nolog) and associated match information
+	matchedLogRules []types.MatchedRule
+
 	// True if the transaction has been disrupted by any rule
 	interruption *types.Interruption
 
@@ -506,6 +509,10 @@ func (tx *Transaction) MatchRule(r *Rule, mds []types.MatchData) {
 	}
 
 	tx.matchedRules = append(tx.matchedRules, mr)
+	if r.Log {
+		tx.matchedLogRules = append(tx.matchedLogRules, mr)
+	}
+
 	if tx.WAF.ErrorLogCb != nil && r.Log {
 		tx.WAF.ErrorLogCb(mr)
 	}
@@ -1311,6 +1318,10 @@ func (tx *Transaction) Interruption() *types.Interruption {
 
 func (tx *Transaction) MatchedRules() []types.MatchedRule {
 	return tx.matchedRules
+}
+
+func (tx *Transaction) MatchedLogRules() []types.MatchedRule {
+	return tx.matchedLogRules
 }
 
 func (tx *Transaction) LastPhase() types.RulePhase {
