@@ -187,6 +187,9 @@ type Transaction interface {
 	// MatchedRules returns the rules that have matched the requests with associated information.
 	MatchedRules() []MatchedRule
 
+	// MatchedLogRules returns the rules(except action:nolog) that have matched the requests with associated information.
+	MatchedLogRules() []MatchedRule
+
 	// DebugLogger returns the debug logger for this transaction.
 	DebugLogger() debuglog.Logger
 
